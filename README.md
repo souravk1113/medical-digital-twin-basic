@@ -13,7 +13,12 @@ the patient's state and risk evolve.
 
 ```
 digital_twin/
-├── docs/digital_twin_medical.md   # literature review + methodology
+├── docs/
+│   ├── digital_twin_medical.md             # base literature review + methodology
+│   └── literature_review_GA_digital_twin.md # modern DT + Geographic Atrophy survey
+├── slides/
+│   ├── build_deck.py                        # generates the pptx
+│   └── medical_digital_twin_GA.pptx         # 41-slide deck (regenerable)
 ├── twin/                          # twin core (state, physiology, risk, simulator)
 ├── scripts/fetch_data.py          # download UCI Heart Disease (cached -> data/)
 ├── scripts/train_model.py         # fit + persist the risk model
@@ -21,6 +26,17 @@ digital_twin/
 ├── requirements.txt
 └── .venv/                         # local virtual environment
 ```
+
+## Documents
+
+- `docs/digital_twin_medical.md` — first-principles intro: definition,
+  taxonomy, methodology, classical use cases.
+- `docs/literature_review_GA_digital_twin.md` — modern foundation-model and
+  LLM-based approaches, GA disease primer, ophthalmology prior art, proposed
+  proof-of-concept and roadmap.
+- `slides/medical_digital_twin_GA.pptx` — presentable 41-slide deck that walks
+  from classical twins → modern paradigms → Geographic Atrophy → PoC proposal.
+  Regenerate with `python slides/build_deck.py`.
 
 ## Quick start
 
