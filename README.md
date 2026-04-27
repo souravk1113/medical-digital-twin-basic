@@ -1,0 +1,58 @@
+# Medical Digital Twin — demo
+
+A small, runnable example of a **patient digital twin** for cardiovascular risk,
+built on public EHR-style data (UCI Heart Disease, Cleveland).
+It combines a mechanistic ODE for vitals with a calibrated ML risk model so you
+can apply *what-if* interventions (statin, antihypertensive, lifestyle) and watch
+the patient's state and risk evolve.
+
+> **Teaching demo only, not a clinical tool.** See `docs/digital_twin_medical.md`
+> for the literature review, methodology, and references.
+
+## Repository layout
+
+```
+digital_twin/
+├── docs/digital_twin_medical.md   # literature review + methodology
+├── twin/                          # twin core (state, physiology, risk, simulator)
+├── scripts/fetch_data.py          # download UCI Heart Disease (cached -> data/)
+├── scripts/train_model.py         # fit + persist the risk model
+├── app.py                         # Streamlit demo
+├── requirements.txt
+└── .venv/                         # local virtual environment
+```
+
+## Quick start
+
+The repository ships with a local `.venv/`. From a fresh shell:
+
+```bash
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+
+# or bash / Git Bash
+source .venv/Scripts/activate
+
+pip install -r requirements.txt
+python scripts/fetch_data.py        # writes data/heart.csv
+python scripts/train_model.py       # writes data/risk_model.joblib + metrics.json
+streamlit run app.py                # opens http://localhost:8501
+```
+
+## What the demo shows
+
+| Architecture layer | In the demo |
+|---|---|
+| Data | UCI Heart Disease loaded via `ucimlrepo` (with offline URL fallback) |
+| State | `Patient` dataclass holding the EHR-style state vector |
+| Mechanistic model | Windkessel-inspired ODE for SBP/DBP/HR + cholesterol response |
+| ML model | Calibrated gradient-boosted trees for CHD risk |
+| Simulation | Forward integration over user-chosen horizon, baseline vs intervention |
+| UI | Streamlit dashboard: cohort picker, state, risk gauge, what-if sandbox |
+
+## Reading order
+
+1. `docs/digital_twin_medical.md` — definition, taxonomy, methodology, use cases.
+2. `twin/patient.py`, `twin/physiology.py`, `twin/risk_model.py`,
+   `twin/simulator.py` — implementation in the same order as the architecture diagram.
+3. `app.py` — how it all comes together as a clinician-facing tool.

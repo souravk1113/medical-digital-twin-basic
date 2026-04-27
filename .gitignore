@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environment (everyone creates their own from requirements.txt)
+.venv/
+venv/
+env/
+
+# Generated artefacts (rebuildable from scripts/)
+data/heart.csv
+data/risk_model.joblib
+data/metrics.json
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Claude Code workspace
+.claude/
